@@ -1,0 +1,15 @@
+input {
+  beats {
+    port => 5044
+  }
+}
+
+# https://www.elastic.co/guide/en/logstash/current/plugins-outputs-http.html#plugins-outputs-http-mapping
+output {
+  http {
+    url => "http://remoteservice:8080"
+    http_method => "post"
+    format => "json"
+    mapping => {"custom_payload" => "%{message}"}
+  }
+}
